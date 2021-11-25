@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mon Panier - La Boutique Française {% endblock %}
+{% block stylesheet %} 
+  <link rel="stylesheet" href="{{asset('assets/css/breackpoint/Cart/cart.css')}}">
+{% endblock %}
+{% block content %}
+  {% for message in app.flashes('notification_cart') %}
+    <div class="alert alert-success">
+      {{message}}
+    </div>
+  {% endfor %}
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Supprimer le panier</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p> Voulez-vous vraiment supprimer l'ensemble de votre panier? </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+          <button type="button" class="btn btn-success">
+            <a href="{{ path('remove_my_cart')}}"> Oui </a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2> Mon Panier </h2>
+
+  <p> Retrouver ici les article présent dans votre panier </p>
+  {% if cart|length > 0 %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Produit</th>
+          <th scope="col"></th>
+          <th scope="col">Quantité</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Total</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{dump(cart)}}
+        {% set total = null %} {# initie une valeur avec twig #}
+        {% set nbProduct = null %}
+        {% for product in cart %}
+        
+        <tr>
+          <th >
+            <img src="/uploads/creaProduct/{{ product.product.illustration}}" alt="{{ product.product.subtittle}}" height="70px" class="img_panier_product">
+          </th>
+          <th >
+            {{ product.product.name }}<br/>
+            <small class="subtittle">{{ product.product.subtittle }}</small>
+          </th>
+          <td>
+            <a href=" {{path('decrease_to_cart' , {'id' : product.product.id})}} " class="icon_manage_quantity" title="diminuer quantité">
+              <img src="{{asset('assets/image/minus.png')}}" height="35px" alt="remove one">
+            </a>
+
+            <span class="up_to_mobile_L"> x <span class='nb_js'>{{product.quantity}}</span> </span>
+            
+            <select name="quantity" class='mobile_L' id=" {{loop.index0}}">
+            {% set key = "" %}
+              {% for i in 1..10 %}
+                {% set key = i %}
+                <option value="{{i}}" product = "{{ product.product.id}}" > {{i}}</option>
+              {% endfor %}
+            </select>
+            <span class = "ssb"> {{ product.product.id}} </span>
+            <span class='link'></span> 
+            <a href=" {{path('add_to_cart', {"id" : product.product.id, "quantity" : key} )}} " class="icon_manage_quantity" title="augmenter quantité">
+            
+              <img src="{{asset('assets/image/add.png')}}" height="35px" alt="add one">
+            </a>
+          </td>
+          <td>{{(product.product.price/100)| number_format(2,',','.')}} €</td>
+          <td>{{((product.product.price * product.quantity)/100) | number_format(2,',','.')}}</td>
+          <td>
+            <a href="{{ path('delete_to_cart', {'id' : product.product.id})}}">
+              <img src="{{ asset('assets/image/delete.png') }}" height="35px" alt="Supprimer mon produit" title="Supprimer"> 
+            </a>
+            
+          </td>
+        </tr>
+        {% set total = total + (product.product.price * product.quantity) %} {# a cahque iteration l'operation sera effextuer calcule pour la somme TT product#}
+        {% set nbProduct = nbProduct + product.quantity %}
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="text-right">
+        <b> Nombre de produits : </b> {#{cart | length }#} {{nbProduct}} <br/>
+        <b> Total de mon panier : </b> {{ (total / 100) | number_format(2,',', '.')}} € <br/>
+        <a href="{{ path('order')}}" class="btn btn-success btn-block"> Valider mon panier </a>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Supprimer mon panier
+        </button>
+        
+    </div>
+  {% else %}
+    <hr/>
+    <p> <b> Votre panier est vide </b> </p>
+  {% endif %}
+
+{% endblock %}
+{% block script %}
+  <script type="text/javascript" src="{{ asset('assets/js/breackpoint/Cart/cart.js')}}"></script>
+{% endblock %}

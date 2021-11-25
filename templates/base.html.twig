@@ -1,19 +1,251 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Le made in france original">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>{% block title %}La Boutique Française - 100% Made In France{% endblock %}</title>
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+    <!-- Bootstrap core CSS -->
+    <!-- asset() Permet de remplacer le chemin classic et d'aller cherche directement les fichiers (*Function twing*)-->
+    {#<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">#}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="{{asset('assets/bootstrap-5.0.2/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link  href="{{asset('assets/css/boutique.css')}}" rel="stylesheet">
+    <link  href="{{asset('assets/css/panier-boutique.css')}}" rel="stylesheet">
+    <link  href="{{asset('assets/css/CheckOrder.css')}}" rel="stylesheet">
+    <link  href="{{asset('assets/css/breackpoint/breackpoint.css')}}" rel="stylesheet">
+    {% block stylesheet %} 
+    {% endblock %}
+    {% block merci_css %}
+    {% endblock %}
+    {% block echec_css %}
+    {% endblock %}
+    {% block javascript %}
+    {% endblock %}
+    {% block reser_css %}
+    {% endblock %}
+    {% block css_404 %}
+    {% endblock %}
+    {% block contact_css %}
+    {% endblock %}
+    {% block css %}
+    {% endblock %}
+    <script src="https://kit.fontawesome.com/83eda6c13e.js" crossorigin="anonymous"></script>
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{{asset('assets/css/carousel.css')}}" rel="stylesheet">
+</head>
+<body>
+<header> 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{path('home')}}">La Boutique Française</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('select_category', {'category' : 'Homme'})}}">Homme</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('select_category', {'category' : 'Femme'})}}">Femme</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Catégory
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="{{path('select_category', {'category' : 'Manteaux'})}}">Manteaux</a></li>
+                            <li><a class="dropdown-item" href="{{path('select_category', {'category' : 'Bonnets'})}}">Bonnets</a></li>
+                            <li><a class="dropdown-item" href="{{path('select_category', {'category' : 'T-shirt'})}}">T-shirt</a></li>
+                            <li><a class="dropdown-item" href="{{path('select_category', {'category' : 'Echarpes'})}}">Echarpes</a></li>
+                            <li><a class="dropdown-item" href="{{path('products')}}">Afficher tout nos produits </a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('contact')}}">Contactez - nous</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('about')}}">Qui sommes-nous ? </a>
+                    </li>
+
+                    <div class="navbar-item_custom">
+                        <span>
+                            {% if app.user %}
+                                <a href="{{ path('account')}}"> {{app.user.firstname }} </a> | <a href="{{ path('app_logout')}}" class="mr-3"> Deconnection </a>
+                            {% else %}
+                                <a href="{{ path('app_login')}}"> Se connecter </a> | <a href="{{ path('register')}}" class="mr-3"> Inscription </a>
+                            {% endif %}
+                            <button type="button" class="btn btn-dark position-relative">
+                                <a href="{{ path('cart')}}">
+                                    <img src="{{ asset('assets/image/shopping-basket.png') }}" class="cart-icon" alt="mon-panier">
+                                </a>
+                                {% if app.session.get('cart')|length > 0 %}
+                                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                        <span class="visually-hidden">New alerts</span>
+                                    </span>
+                                {% endif %}
+                            </button>
+                            
+                        </span>    
+                    </div>
+                    
+                </ul>
+                {#
+                    <div class="navbar-item_custom">
+                        <span>
+                            {% if app.user %}
+                                <a href="{{ path('account')}}"> {{app.user.firstname }} </a> | <a href="{{ path('app_logout')}}" class="mr-3"> Deconnection </a>
+                            {% else %}
+                                <a href="{{ path('app_login')}}"> Se connecter </a> | <a href="{{ path('register')}}" class="mr-3"> Inscription </a>
+                            {% endif %}
+                    
+                            <a href="{{ path('cart')}}">
+
+                                <img src="{{ asset('assets/image/shopping-basket.png') }}" class="cart-icon" alt="mon-panier">
+                            
+                            </a>
+                        </span>    
+                    </div>
+                #}
+                
+            </div>
+        </div>
+        
+    </nav>
+
+</header>
+
+<main role="main">
+    {% if block('carousel') is defined %}
+    {#
+        loop.index	The current iteration of the loop. (1 indexed)
+        loop.index0	The current iteration of the loop. (0 indexed)
+        loop.revindex	The number of iterations from the end of the loop (1 indexed)
+        loop.revindex0	The number of iterations from the end of the loop (0 indexed)
+        loop.first	True if first iteration
+        loop.last	True if last iteration
+        loop.length	The number of items in the sequence
+        loop.parent	The parent context
+  
+        https://twig.symfony.com/doc/3.x/tags/for.html
+    #}
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {% for header in headers %}
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{loop.index0}}" {% if loop.index0 == 0 %} class="active" {% endif %}aria-current="true" aria-label="{{loop.index}}"></button>
+                {% endfor %}
+                    {#<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>#}
+            </div>
+            <div class="carousel-inner">
+                {% for header in headers %}
+                {#{dump(loop.index)}#}
+
+                    <div {% if loop.index == 1%} class="carousel-item active" {% else %} class="carousel-item" {% endif %}>
+                        <img src="/uploads/headerImg/{{header.illustration}}" class="d-block w-100" alt="image du header">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{header.title}}</h5>
+                            <p>{{header.content}}</p>
+                            <button class="btn btn-light"> <a href="{{header.getBtnUrl()}}"> {{header.getBtnTitle()}} </a></button>
+                        </div>
+                        
+                    </div>
+
+                {% endfor %}    
+                
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    {% endif %}
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing {% if block('carousel') is not defined %}mt-5{% endif %}" >
+        {% block content %}
+        
         {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+        
+        <!-- /END THE FEATURETTES -->
+
+    </div><!-- /.container -->
+</main>
+<!-- FOOTER -->
+<footer class="footer-container">
+    <p class="float-right">
+        <a href="#">Back to top</a>
+    </p>
+
+    <p>
+        &copy; 2020-2021 La Boutique Française. <br/>
+        <div class="list_footer">
+            <ul>
+
+                <h5> Aide & Information </h5>
+                <li> <a href="#"> Condition D'utilisation </a> </li>
+                <li> <a href="{{path('contact')}}"> Contact </a> </li>
+                <li> <a href="#"> Suivi de commande </a> </li>
+                <li> <a href="{{path('about')}}"> Qui sommes-nous? </a> </li>
+
+            </ul>
+
+            <ul>
+
+                <h5> Produits </h5>
+                <li> <a href="#"> Produit a venir </a> </li>
+                <li> <a href="#"> Partenariat </a> </li>
+                <li> <a href="#"> Catégory </a> </li>
+                
+            </ul>
+        </div>
+    </p>
+
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>#}
+<script src="{{asset('assets/bootstrap-5.0.2/js/bootstrap.bundle.js')}}"></script>
+<script src="{{asset('assets/js/dropdown/dropdown.js')}}"></script>
+<script src="{{asset('assets/js/NavBar/close.js')}}"></script>
+{% block js %}
+{% endblock %}
+{% block contact_js %}
+{% endblock %}
+</body>
+{% block script %}
+{% endblock %}
 </html>

@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - La Boutique Française {% endblock %}
+
+{% block contact_css %}
+    <link rel="stylesheet" href="{{asset('/assets/css/contact/social/social.css')}}">
+{% endblock %}
+
+{#
+    The form_row() function outputs the entire field contents, including the label, help message, HTML elements and error messages.
+    The next step is to use the form_start(), form_end(), form_errors() and form_row() Twig functions to render the different form parts so you can customize them adding HTML elements and attributes.
+
+    https://symfony.com/doc/current/form/form_customization.html    
+
+#}
+
+{% block content %}
+
+    <h4> Formulaire de contact </h4>
+    {% for message in app.flashes('notif_mail') %}
+        <div class="alert alert-info">
+            {{message}}
+        </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-8">
+            {{form_start(form)}}
+                <div class='row'>
+                    <div class="col-md-6">
+                        {{form_row(form.prenom)}}
+                    </div>
+                    <div class="col-md-6">
+                        {{form_row(form.nom)}}
+                    </div>                
+                </div>
+                {{form(form)}}
+            {{form_end(form) }}
+        </div>
+        <div class="col-md-4">
+            <h5> Info contact </h5>
+            <hr/>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <strong> Mail : </strong><br/>
+                        Contact@gmail.com<br/>
+                        <strong> Numéro de Télephone : </strong><br/>
+                        0606060606 <br/>
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="social_media">
+                        <a href ="#" title="twitter" > <img src="{{ asset('/assets/image/social_medias/twitter.png')}}" alt="image icon twitter" class='link_img'> <span class='text_magic'> Twitter </span> </a>
+                        <a href ="#"  title="facebook"  > <img src="{{ asset('/assets/image/social_medias/facebook.png')}}" alt="image icon facebook" class='link_img'>  <span class='text_magic'> Facebook </span> </a>
+                        <a href ="#"  title="instagram"  > <img src="{{ asset('/assets/image/social_medias/instagram.png')}}" alt="image icon instagram" class='link_img'>  <span class='text_magic'> Instagram </span> </a>
+                    </div>
+                </div>
+               
+            </div>
+            
+        </div>
+
+    </div>
+    
+{% endblock %}
+{% block contact_js %}
+    <script type="text/javascript" src="{{ asset('/assets/js/contact/social.js')}}">
+{% endblock %}

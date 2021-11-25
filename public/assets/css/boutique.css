@@ -1,0 +1,169 @@
+.navbar-item_custom, .navbar-item_custom a{
+     color: white;
+}
+
+.navbar-item_custom{
+    position: absolute;
+    right: 0;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+main{
+    margin-bottom: 200px;
+}
+
+h1{
+    text-align: center;
+    margin:auto;
+    margin-bottom: 35px;
+}
+
+a{
+    text-decoration:none;
+}
+
+/*------- Font Face ------*/
+@font-face {
+    font-family: 'adine_kirnbergregular';
+    src: url('/public/assets/font/adine_kirnberg-webfont.woff2') format('woff2'),
+         url('/public/assets/font/adine_kirnberg-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'adine_kirnberg_alternateRg';
+    src: url('/public/assets/font/adinekirnberg-alternate-webfont.woff2') format('woff2'),
+         url('/public/assets/font/adinekirnberg-alternate-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* ---------- PRODUCTS --------*/
+
+.product-container{
+    margin-bottom: 170px;
+}
+
+.product_item{
+    text-align: center;
+}
+
+.product_item h5{
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom:0.5px;
+}
+
+.product_item .product_subtittle{
+    display: block;
+    font-weight: lighter;
+    font-family:'adine_kirnbergregular' , 'adine_kirnberg_alternateRg';
+}
+
+.product_item .product_price{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* ------- PRODUCT ------- */
+
+.container_details{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    margin-top:30px;
+    margin-bottom: 250px;
+}
+
+.cart_boutton{
+
+    width: 350px;
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    color:whitesmoke;
+
+}
+
+.container_details h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product_price{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.container_details .description{
+    display: block;
+    margin-top: 15px;
+}
+
+.container_details .product_subtittle{
+    margin-right: 35px ;
+}
+
+@media(min-width: 300px) and (max-width: 500px) {
+    .product_item img{
+        width:60%;
+    }
+    div.container_details div.row div.col-md-6{
+        text-align: center;
+    }
+
+    div.col-md-6 img.img-fluid{
+        width:70%;
+        
+    }
+}
+
+/* ------- FOOTER -------*/
+
+footer{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 5px;
+    bottom: 0px;
+    
+    background-color:rgba(128, 128, 128, 0.089);
+
+}
+
+footer a:hover{
+    color:red;
+}
+
+footer .list_footer{
+    display: flex;
+    justify-content: space-around;
+}
+
+footer li{
+    list-style: none;
+}
+footer ul{
+    padding: 5px;
+}
+
+footer h5{
+    text-align: center;
+}
+
+/* ------- breack body -------*/
+
+

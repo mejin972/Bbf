@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Nos produits - La Boutique Française!{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{asset('assets/css/ListProduct/FilterProduct.css')}}">
+{% endblock %}
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-3">
+        <pre>
+            {{ dump(form) }}
+        </pre>
+            <h3> Filtre </h3>
+            {#{form_start(form) }}
+                <div class="d-grid gap-2">
+                    {{form_row(form.submit)}}
+                </div>
+            {{form_end(form) }#}
+            
+            {{form(form)}}
+            {#{form(formSelect)}#}
+
+        </div>
+    
+    
+        <div class="col-md-9">
+    
+            <h1> Nos produits </h1>
+
+            <div class="row product-container">
+
+                {% for product in products %}
+
+                    <div class="col-md-4">
+
+                        <div class="product_item">
+
+                            <a href="{{ path('product' , {'slug' : product.slug}) }}" title="{{ product.subtittle}}"> <img src="/uploads/creaProduct/{{product.illustration}}" alt="{{product.subtittle}}" class="img-fluid"/> </a> 
+
+                            <h5>{{ product.name }}</h5>
+
+                            <span class="product_subtittle"> {{product.subtittle}}</span>
+
+                            <span class="product_price"> {{ (product.price/100)|number_format(2, ',', '.') }} €</span>
+
+                        </div>
+
+                    </div>
+            
+                {% endfor %}
+    
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="{{ asset('assets/js/breackpoint/breack.js')}}">
+{% endblock %}

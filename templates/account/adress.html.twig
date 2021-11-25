@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mes Adresses - La Boutique Française {% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{asset('assets/css/adresse.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/breackpoint/Adresse/adresseBreackpoint.css')}}">
+{% endblock %}
+
+{% block content %}
+    <a href="{{path('account_adress_add')}}" class="btn btn-info btn-sm float-right"> Ajouter une adresse </a>
+    <h1> Mes Adresses </h1>
+    {% for adress in app.user.adresses %}
+        <div class="modal fade" id="exampleModal{{loop.index0}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel{{loop.index0}}">Notifications</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Etes-vous sur de vouloir supprimer l'adresse <b><span class="insert"></span></b> ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Non </button>
+                        <button type="button" class="btn btn-success"> <a href="{{path('account_adress_delete', {'id' : adress.id} ) }}"> Oui </a> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <p> C'est dans cette espace que vous allez pouvoir gérer vos adresse. <a href="{{path('account')}}" title=" Retourner à l'espace personnel"> Retour </a> </p>  
+    {% if app.user.adresses|length == 0 %}
+
+        <p class="text-center">
+            Vous n'avez pas encore ajouter d'adresse, pour en ajouter veillez <a href="{{path('account_adress_add')}}"> cliquez ici </a>
+        </p>
+    {% else %}
+        
+        
+        <div class="contain_card">
+            {% for adress in app.user.adresses %}
+                {#<div class="col-md-4">#}
+                    <div class="card" style="width: 18rem; height: 200px;">
+                        {#<img src="..." class="card-img-top" alt="...">#}
+                        <div class="card-body">
+                            <h5 class="card-title text-center mb-4"> {{adress.name}}</h5>
+                            {% if adress.company %}
+                                <h6 class="card-subtitle mb-2 text-muted">{{adress.company}}</h6>
+                            {% else %}
+                                <h6 class="card-subtitle mb-2 text-muted"> </h6>
+                            {% endif %}
+                            <p class="card-text">
+                                {{adress.address}}, {{adress.codepostal}} {# Ne trouve et ne reconnai pas adress.code_postal mais codepostal. error a explore #}<br/>
+                                {{adress.city}}, {{adress.pays}}
+                            </p>
+                            <button class="btn btn-secondary">
+                                <a href="{{ path('account_adress_change', {'id' : adress.id } ) }}"> Modifier </a>
+                            </button>
+                            | 
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{loop.index0}}">
+                                Supprimer 
+                            </button> 
+                        </div>
+                    </div>
+                {#</div>#}
+            {% endfor %}
+        </div>
+        <a href="{{path('account_adress_add')}}" class="btn btn-info down"> Ajouter une adresse </a>
+    {% endif %}
+    
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{{ asset('assets/js/breackpoint/breackAdress.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/adress_modal/name_adress.js') }}"></script>
+{% endblock %}

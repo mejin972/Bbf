@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Réinitialiser mot de passe - La Boutique Française {% endblock %}
+
+{% block content %}
+{#
+
+<pre>
+        {{ dump(app.flashes('success')) }}
+        {{ dump(app.flashes('error')) }}
+        {{ dump(app.flashes) }}
+    </pre>
+
+#}
+    
+
+    {% for message in app.flashes('error') %}
+
+        <div class="alert alert-danger">
+            {{message| raw}}
+        </div>
+
+    {% endfor %}
+    {% for message in app.flashes('success') %}
+    
+        <div class="alert alert-success">
+            {{message| raw}}
+        </div>
+
+    {% endfor %}
+    <form method="post">
+    
+        <h1 class="h3 mb-3 font-weight-normal"> Réinitialiser votre mot de passe </h1>
+
+        <label for="inputEmail" class="mb-2">Adresse Mail</label>
+        <input type="email"  name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Veuillez entrer votre adresse mail">
+        
+        <button class="btn btn-lg btn-primary mt-3" type="submit">
+            Validez
+        </button>
+        <p class="text-center"> <a href="{{path('register')}}"> Se connecter </a> </p>
+
+    </form>
+{% endblock %}

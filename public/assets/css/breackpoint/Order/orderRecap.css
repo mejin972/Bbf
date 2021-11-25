@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+    body::before{
+        content: 'tablette';
+        display: none;
+    }
+   div.form-check{
+       text-align: center;
+   }
+   div.order_summary div.row{
+       display:flex !important;
+       flex-direction: row !important;
+   }
+}

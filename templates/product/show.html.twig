@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{product.name}} - La Boutique Française!{% endblock %}
+
+{% block content %}
+
+<div class="container_details">
+
+    <h1> Fiche Produit </h1>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <img src="/uploads/creaProduct/{{product.illustration}}" alt="{{product.subtittle}}" class="img-fluid"/>
+
+        </div>
+
+        <div class="col-md-6 my-auto">
+
+                <h4>{{ product.name }}</h4>
+                <span class="product_subtittle"> {{product.subtittle}}</span>
+                <span class="product_price"> {{(product.price/100) | number_format(2,',', '.')}} €</span>
+                <span class="description"> {{product.description}}</span>
+            
+        </div>
+
+    </div>
+
+    <a href="{{ path('add_to_cart', {'id': product.id})}}"> <button class="cart_boutton btn btn-primary" type="button" > Ajouter au panier <i class="fas fa-shopping-cart"></i> </button> </a>
+
+</div>
+    
+    
+{% endblock %}

@@ -1,0 +1,17 @@
+.content_merci span {
+    font-weight: bold;
+}
+
+.content_merci h3{
+    text-align: center;
+}
+
+.recap_merci{
+    text-align:center;
+}
+
+
+.recap_merci .row{
+    background-color:aquamarine;
+    border-radius: 10px;
+}

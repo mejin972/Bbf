@@ -1,0 +1,5 @@
+@media (max-width: 768px) {
+    button#order_submit.btn.btn-success.btn-block.mt-4.btn {
+        width: 100%;
+    }
+}

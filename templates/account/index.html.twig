@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mon Compte - La boutique Française{% endblock %}
+
+{% block content %}
+    <h1> Mon Compte </h1>
+    <p> Bienvenue <strong> {{app.user.firstname}} </strong> </p>
+   <!-- {{ dump(app.user.firstname) }}  {{ dump()}} correspont a un vardump en PHP -->
+   {#
+        is_granted: {{ is_granted(role, object = null, field = null) }}
+        Returns true if the current user has the given role.
+        https://symfony.com/doc/current/reference/twig_reference.html#is-granted
+   #}
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{path('admin')}}"> - Voir le back office </a><br/>
+    {% endif %}
+    <a href="{{path('account_password')}}"> - Modifier mon mot de passe </a><br/>
+    <a href="{{path('account_adress')}}"> - Gérer mes adresses </a><br/>
+    <a href="{{path('account_order')}}"> - Mes commandes </a>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Erreur la page est introuvable {% endblock %}
+
+{% block css_404 %}
+    <link type="text/css" rel="stylesheet" href="{{asset('assets/css/404/style.css')}}" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h1>Oops!</h1>
+			</div>
+			<h2>404 - Page non trouver </h2>
+			<p>Il semblerait que le page que vous chercher n'est pas été trouver. </p>
+			<a href="{{path('home')}}"> Aller à la page d'acceuil </a>
+		</div>
+	</div>
+
+{% endblock %}

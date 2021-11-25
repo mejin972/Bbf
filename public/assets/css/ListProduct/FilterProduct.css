@@ -1,0 +1,23 @@
+form #submit.btn.btn-info{
+    width:100%;
+}
+
+#categories::before{
+    content: "xsmall";
+    visibility: hidden;
+}
+
+@media(min-width: 501px){
+    #categories::before{
+        content:"normal";
+    }
+}
+
+@media(min-width: 300px) and (max-width: 500px) {
+    #categories::before{
+        content:"small";
+    }
+    .product_item img{
+        width:60%;
+    }
+}

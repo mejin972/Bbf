@@ -1,0 +1,32 @@
+
+.containOrder_mobile_L {
+    display: none;
+}
+
+
+/*-------------- breakpoint ---------*/
+@media (max-width:755px){
+    body::before {
+        content : "mobile_L";
+        display:none;
+    }
+    .containOrder_mobile_L{
+        display:block;
+    }
+    #accordionExample{
+        margin-top:20px;
+    }
+    table.table-responsive-sm.table-hover.mt-3{
+        display: none;
+    }
+    #accordionExample button{
+        width:100%;
+    }
+    #accordionExample a{
+        color: aliceblue;
+    }
+    .accordion-body{
+        display:flex;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Validez ma commande - La Boutique Française {% endblock %}
+
+{% block stylesheet %} 
+    <link rel="stylesheet" href="{{asset('assets/css/breackpoint/Order/order.css')}}"
+{% endblock %}
+
+{% block content %}
+    <h2> Je passe ma commande </h2>
+    <p> Choisissez vos informatioin de commande et préférence ici </p>
+    <hr/>
+    <div class="row">
+        
+        {#{ dump(form) }#}
+        
+        <div class="col-md-6">
+            {% set formHtml %}
+                {{  form_start(form, {action: path('order_recapitulatif')}) }}
+                {{ form_end(form) }}
+                {#{ form(form) }#}
+            {% endset %}
+            
+            {{  formHtml|replace({'[br]' : '<br/>'})|raw }} {# Change les caractère désigner, ' str ' en PHP ; raw = interprète moi le Html#}
+            
+        </div> 
+
+        <div class="col-md-6">
+            <div class="text-center">
+                <b> Récapitulatif de ma commande</b> <br/>
+            </div>
+         
+            {#{<pre>
+                {{ dump(cart) }}
+            </pre>}#}
+            <div class=" order_summary "> 
+                {% set total = null %} {# initie une valeur avec twig #}
+                {% set nbProduct = null %}
+                {% for product in cart %}
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="/uploads/creaProduct/{{ product.product.illustration}}" alt="{{ product.product.subtittle}}"  height="65px" >
+                        </div>
+                    
+                        <div class="col-md-8 my-auto">
+                            <b>
+                                {{ product.product.name }}<br/>
+                            </b>   
+                            <small> {{ product.product.subtittle}} </small>
+                        </div>
+
+                        <div class="col-md-2 my-auto">
+                            <p>
+                                x {{product.quantity}}
+                            </p>
+                        </div> 
+                    </div>
+                    {% set total = total + (product.product.price * product.quantity) %} {# a cahque iteration l'operation sera effextuer calcule pour la somme TT product#}
+                    {% set nbProduct = nbProduct + product.quantity %}
+                {% endfor %}
+            </div> 
+            <div class="text-right">
+                <b> Nombre de produits : </b> {#{cart | length }#} {{nbProduct}} <br/>
+                <b> Total de mon panier : </b> {{ (total / 100) | number_format(2,',', '.')}} €
+            </div>
+            
+        </div>
+
+    </div>
+{% endblock %}

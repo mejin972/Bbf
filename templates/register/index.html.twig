@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <h1> Inscription</h1>
+    {% for register_notification in app.flashes('notification_register') %}
+        {{register_notification}}
+    {% endfor %}
+    Formaulaire d'inscription
+
+    {{form(form)}}
+
+{% endblock %}

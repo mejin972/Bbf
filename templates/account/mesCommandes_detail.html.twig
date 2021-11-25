@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Détail de commande - La boutique Française{% endblock %}
+
+{% block content %}
+    <div class="my_orderDeatil_content">
+    
+        <h3> Ma commande - <span class="badge bg-secondary text-white">{{order[0].reference}}</span>  </h3>
+        <p> C'est dans cette espace que vous allez pouvoir voir le détail de vos commandes</p>
+        <a href="{{ path('account')}}"> Retour au compte</a>
+        <hr/>
+       
+        <p> <strong> Commande passé le : </strong> {{order[0].createdAt | date('d/m/Y')}} </p><br/>
+        <p> <strong> Référence de la commande : </strong> {{order[0].reference}} </p> <br/>
+        <p> 
+            <strong> Statue de votre commande : </strong> 
+            {% if order[0].state == 0 %}
+                Commande non payer
+            {% elseif order[0].state == 1 %}
+                Commande payer
+            {% elseif order[0].state == 2 %}
+                Commande en cour de préparation
+            {% elseif order[0].state == 3 %}
+                Commande en attante de prise en charge par <strong> {{order[0].carrierName}} </strong>
+            {% elseif order[0].state == 4 %}
+                Commande prise en charge par <strong> {{order[0].carrierName}} </strong>
+            {% endif %}
+        </p> 
+
+                <br/>
+        <p> <strong> Transporteur choisie : </strong> {{order[0].carrierName}} </p> 
+        <hr/>
+        <h5 class="text-center mb-5"> Détail de la commande </h5>
+        <div class="row">
+            <div class="col-md-6">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Produit</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Prix unitaire</th>
+                        <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {% for product in order[0].orderDetails.getValues() %}
+                            <tr>
+                            <th scope="row">{{product.product}}</th>
+                            <td>{{product.quantity}}</td>
+                            <td>{{(product.price / 100 )| number_format(2,',', '.')}} €</td>
+                            <td>{{(product.total / 100 )| number_format(2,',', '.')}} €</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+ 
+                <div class="text-right">
+                   <p class="mb-0"> <strong> Sous - total :</strong> {{(order[0].getTotal / 100 ) | number_format(2,',', '.')}} € </p><br/>
+                   <p class="mb-0"> <strong> Livraison : </strong> {{(order[0].carrierPrice / 100 ) | number_format(2,',', '.')}} €  </p><br/>
+                   <p class="mb-0"> <strong> Total : </strong> {{((order[0].getTotal + order[0].carrierPrice) / 100) | number_format(2,',', '.')}} € </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <strong> Mon Adresse de livraison </strong> <br/>
+                <p class="text-center bg-secondary text-white"> {{order[0].delivery | raw }}</p>
+            </div>
+        </div>
+        <a href="{{path('account_order')}}" class="mt-3"> Retour au commande </a>
+    </div>
+    
+{% endblock %}

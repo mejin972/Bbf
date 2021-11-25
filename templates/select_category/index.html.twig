@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{category}} - La Boutique Française{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{asset('assets/css/ListProduct/noProduct.css')}}" type="text/css">
+{% endblock %}
+{% block content %}
+    {<pre>
+        {{ dump(products) }}
+    </pre>}
+    <div class="row">
+
+        <div class="col-md-3">
+
+            <h3> Filtre </h3>
+            {{ form_start(form) }}
+                {{form(form) }}
+                 
+            {{form_end(form) }}
+
+        </div>
+    
+    
+        <div class="col-md-9">
+    
+            <h1>{{category}} </h1>
+
+            <div class="row product-container">
+            {% if products | length > 0 %}
+                {% for product in products %}
+
+                    <div class="col-md-4">
+
+                        <div class="product_item">
+
+                            <a href="{{ path('product' , {'slug' : product.slug}) }}" title="{{ product.subtittle}}"> <img src="/uploads/creaProduct/{{product.illustration}}" alt="{{product.subtittle}}" class="img-fluid"/> </a> 
+
+                            <h5>{{ product.name }}</h5>
+
+                            <span class="product_subtittle"> {{product.subtittle}}</span>
+
+                            <span class="product_price"> {{ (product.price/100)|number_format(2, ',', '.') }} €</span>
+
+                        </div>
+
+                    </div>
+            
+                {% endfor %}
+            {% else %}
+               <div class="contain_noProduct">
+                    <p> Nous sommes désoler aucun produit ne correspond à votre recherche </p>               
+               </div>
+            {% endif %}
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

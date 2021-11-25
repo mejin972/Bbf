@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}A propos de nous - La Boutique Française {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{asset('assets/css/about/about.css')}}"
+{% endblock %}
+
+{% block content %}
+{#
+    https://www.lipsum.com/feed/html
+#}
+    <div class="title">
+        <h1> La Boutique Française </h1>
+        <h3> L'éssentielle français</h3>
+    </div>
+    <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean cursus eros laoreet justo commodo faucibus. Donec in porta turpis, nec blandit ipsum. Mauris accumsan nulla eu felis fermentum, sagittis porttitor massa dignissim. Fusce sodales tellus in feugiat commodo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean vitae eros et enim venenatis lacinia. Sed sed faucibus tortor. Nulla facilisi. Curabitur eget ultricies diam, a faucibus erat. Nam nec nunc consectetur, ultricies mi a, laoreet ex. Proin accumsan posuere dui in sollicitudin. Suspendisse vitae velit sollicitudin, faucibus ante sit amet, pulvinar urna.</p>
+    </div>
+    <hr/>
+    <div class="content">
+        <img src="{{asset('assets/image/about/about.png')}}" alt="Illustration savoir faire" class="img-fluid">
+    </div>
+    <hr/>
+    <div class="content">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque hendrerit ligula quis nunc molestie sagittis. Nulla nulla ex, rhoncus ultricies vehicula non, ultricies a ante. Nulla interdum libero quis libero gravida, vitae viverra elit hendrerit. Duis iaculis vestibulum metus sed auctor. Proin ultricies vel nibh ut sagittis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas eros magna, dictum et nunc in, auctor sodales leo. In hendrerit consequat sapien, at eleifend massa hendrerit et. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam at eleifend libero. Phasellus mattis, purus a efficitur ullamcorper, risus sapien vehicula nulla, vitae bibendum orci neque sed orci. Ut in orci orci.
+
+            Fusce nec rhoncus lacus. Mauris lacinia interdum sem, id tincidunt leo efficitur in. Proin quis enim elit. In eget mi vel arcu maximus euismod a at dui. Nam tincidunt, ipsum viverra porttitor ornare, sapien purus ornare eros, at blandit mi lectus vitae dolor. Morbi eu lectus vitae tortor scelerisque cursus sed quis metus. Sed et augue pretium, consequat nulla vel, porta urna. In hac habitasse platea dictumst.
+        </p>
+    </div>
+{% endblock %}

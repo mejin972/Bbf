@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block reser_css %}
+    <link rel="stylesheet" href="{{asset('assets/css/reset.css')}}"
+{% endblock %}
+{% block title %} Réinitialiser mot de passe - La Boutique Française {% endblock %}
+
+{% block content %}
+{#
+
+<pre>
+        {{ dump(app.flashes('success')) }}
+        {{ dump(app.flashes('error')) }}
+        {{ dump(app.flashes) }}
+    </pre>
+
+#}
+   
+
+    {% for message in app.flashes('notif-error') %}
+
+        <div class="alert alert-danger">
+            {{message| raw}}
+        </div>
+
+    {% endfor %}
+    {% for message in app.flashes('notif-success') %}
+    
+        <div class="alert alert-success">
+            {{message| raw}}
+        </div>
+
+    {% endfor %}
+    <form method="post" action="/reset/modifier_password/{{idenfUser}}">
+    
+        <h1 class="h3 mb-3 font-weight-normal"> Réinitialiser votre mot de passe </h1>
+        <span class="alert alert-danger"></span>
+
+        <label for="newPassword" class="mb-2">Votre nouveau mot de passe</label>
+        <input type="password"  name="new_password" id="newPassword" class="form-control" autocomplete="password" required autofocus placeholder=" Veuillez saisir votre nouveau mot de passe ">
+
+        <label for="confirmNewPassword" class="mb-2">Comfirmer votre nouveau mot de passe</label>
+        <input type="password"  name="comfirm_new_password" id="confirmNewPassword" class="form-control" autocomplete="password" required autofocus placeholder=" Veuillez comfirmer votre nouveau mot de passe  ">
+        
+        <div class="d-grid gap-2">
+            <button class="btn btn-info mt-3" type="submit">
+                Mettre à jour
+            </button>
+        </div>
+        <div class="info">
+            <p class="text-center mt-3 mb-3"> <a href="{{path('account')}}"> Se connecter </a> </p>
+        </div>
+        
+
+    </form>
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="{{asset('assets/js/reset.js')}}">
+{% endblock %}

@@ -1,0 +1,24 @@
+.card:hover{
+    background-color: rgba(185, 184, 184, 0.096);
+    transition: 1.5s;
+    position: relative;
+    top: 1.5px;
+    box-shadow: 10px 5px 5px rgba(219, 219, 219, 0.267); 
+}
+
+.card a:hover{
+    text-decoration:none;
+    color: rgba(97, 118, 238, 0.377);
+}
+
+div.modal-footer a{
+    text-decoration:none;
+    color:aliceblue;
+}
+
+button.btn.btn-secondary a{
+    color:aliceblue;
+}
+
+
+

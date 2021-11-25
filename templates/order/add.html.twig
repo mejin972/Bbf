@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{#% block javascript %}
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %#}
+
+{% block title %} Paiment de  ma commande - La Boutique Française {% endblock %}
+
+{% block stylesheet %} 
+    <link rel="stylesheet" href="{{asset('assets/css/breackpoint/Order/orderRecap.css')}}"
+{% endblock %}
+
+{% block content %}
+    <h2> Mon récapitulaitif </h2>
+    <p> Vérifiez vos information avant de payer voter commande</p>
+    <hr/>
+    <div class="row">
+        
+        <div class="col-md-6">
+            <strong> Mon adresse de livraison </strong><br/>
+            <div class="form-check">
+                {{delivery | raw }}
+            </div>
+            <hr/>
+            <strong> Mon transporteur </strong><br/>
+            <div class="form-check">
+                {{ carrier.name }}<br/>
+                {{carrier.description}}<br/>
+                {{ (carrier.price / 100 ) | number_format(2,',', '.')}} €
+            </div>
+        </div> 
+
+        <div class="col-md-6">
+            <div class="text-center">
+                <h5> Récapitulatif de ma commande</h5> 
+            </div>
+         
+            {#{<pre>
+                {{ dump(cart) }}
+            </pre>}#}
+            <div class=" order_summary "> 
+                {% set total = null %} {# initie une valeur avec twig #}
+                {% set sous_total = null %}
+                {% set nbProduct = null %}
+                {% for product in cart %}
+                
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img src="/uploads/creaProduct/{{ product.product.illustration}}" alt="{{ product.product.subtittle}}"  height="65px" >
+                        </div>
+                    
+                        <div {#class="col-md-8 my-auto"#} >
+                            <b>
+                                {{ product.product.name }}<br/>
+                            </b>   
+                            <small> 
+                                {{ product.product.subtittle}} 
+                            </small><br/>
+                            <p>
+                                x {{product.quantity}}
+                            </p>
+                        </div>
+
+                        <div {#class="col-md-2 my-auto"#} >
+                            <p> {{((product.product.price * product.quantity)/100) | number_format(2,',','.')}} € </p>
+                        </div> 
+                    </div>
+                    {% set sous_total = sous_total + (product.product.price * product.quantity) %} {# a cahque iteration l'operation sera effextuer calcule pour la somme TT product#}
+                    {% set nbProduct = nbProduct + product.quantity %}
+                {% endfor %}
+            </div> 
+            <div class="text-left">
+                {% set total = (sous_total / 100) + (carrier.price / 100 ) %}
+                <b> Nombre de produits : </b> {#{cart | length }#} {{nbProduct}} <br/>
+                <b> Sous total : </b> {{ (sous_total / 100) | number_format(2,',', '.')}} €
+                <hr/>
+                <strong> Livraison : </strong> {{ (carrier.price / 100) | number_format(2,',', '.')}} € 
+                <hr/>
+                <strong> Total : </strong> {{ total | number_format(2,',', '.')}} €
+            </div> 
+            <form action="/commande/create-checkout-session/{{reference}}" method="POST">
+                <button type="submit" class="btn btn-success btn-block mt-2"> Payer | {{ total | number_format(2,',', '.')}} € </button>
+            </form>
+            {# <a href="#" class="btn btn-success btn-block mt-2"> Payer | {{ total | number_format(2,',', '.')}} € </a> #}
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script type="text/javascript" src="{{ asset('assets/js/breackpoint/Order/orderRecap.js') }}"></script>
+{% endblock %}
+

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Echec de paiment - La Boutique Française {% endblock %}
+
+{% block echec_css %}
+    <link rel="stylesheet" href="{{asset('assets/css/echec_order.css')}}">
+{% endblock  %}
+
+{% block content %}
+<div class="content_error">
+
+    {#{dump(order)}#}
+    <h3> Echec de paiment </h3>
+    <p> Bonjour {{order.user.firstname}} {{order.user.lastname}} </p><br/>
+    <p> 
+        Votre commande <span> n° {{order.reference}} à échouer </span> </br>
+        Un Mail de comfirmation d'erreur  vient d'être envoyer a l'adresse suivante <span>{{order.user.email}} </span>
+    </p>
+    <hr/>
+    {###{dump(order.orderDetails.getValues())}#}
+    <h5> Récapitulatif de commande </h5>
+
+    <div class="recap_merci">
+
+        {% set sous_total = null %}
+        {% for product in (order.orderDetails.getValues()) %}
+            <div class="row mt-1">
+                <div class="col-md-4">
+                    {{product.product}}
+                </div>
+                <div class="col-md-4 my-auto">
+                    {{product.quantity}}
+                </div>
+                <div class="col-md-4 my-auto">
+                    {{(product.total /100) | number_format(2,',','.')}} €
+                </div>
+            </div>
+            {% set sous_total = sous_total + (product.total * product.quantity) %}
+        {% endfor %}
+        <p class="text-right mt-2" > Pour un sous - total de : {{(sous_total /100) | number_format(2,',','.')}} €</p>
+    </div>
+    <hr />
+    <a href="{{ path('order')}}" class="btn btn-danger btn-block"> Réesayer le paiment | {{(sous_total /100) | number_format(2,',','.')}} € </a>
+    <hr/>
+    <p> Pour plus de détail sur votre commande, rendez - vous dans votre <a href="{{path('account')}}"> espace personnel </a>{# definir vue pour suivie échec de commande #}
+</div>
+{% endblock %}

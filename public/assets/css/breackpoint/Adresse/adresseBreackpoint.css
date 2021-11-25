@@ -1,0 +1,112 @@
+/* --------------------- Breackpoint --------------------- */
+@media (min-width:280px) and (max-width:426px){
+    body::before{
+        content: 'phone';
+        display:none;
+    }
+    
+    a.btn.btn-info{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    div.contain_card{
+        display:flex;
+        flex-direction: column;
+        justify-content:space-around;
+        align-items:center;
+    }
+
+    .card{
+        margin-bottom:10px;
+    }
+}
+
+@media (min-width:427px) and (max-width:769px){
+    body::before{
+        content: 'tablette';
+        display:none;
+    }
+    
+    a.btn.btn-info{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+   
+
+    div.contain_card{
+        margin-top: 50px;
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+    }
+
+    .card{
+        margin-bottom:10px;
+    }
+}
+
+@media (min-width: 769px) and (max-width:1024px){
+    body::before{
+        content: 'laptop';
+        display:none;
+    }
+
+    div.contain_card{
+        margin-top: 50px;
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+    }
+
+    a.btn.btn-info.down{
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+@media (min-width: 1024px) and (max-width:1440px) {
+
+    body::before{
+        content: 'laptop_L';
+        display:none;
+    }
+    
+    div.contain_card{
+        margin-top: 50px;
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+    }
+
+    a.btn.btn-info.down{
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+@media (min-width: 1441px){
+    body::before{
+        content: '4K';
+        display:none;
+    }
+
+    div.container.marketing{
+        max-width: 90%;
+    }
+
+    div.contain_card{
+        margin-top: 50px;
+        display:flex;
+        justify-content:space-around;
+        align-items:center;
+    }
+    a.btn.btn-info.down{
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .card p{
+        font-size: 20px;
+    }
+}

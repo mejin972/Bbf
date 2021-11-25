@@ -1,0 +1,17 @@
+.form-check{
+    background-color: rgba(134, 230, 233, 0.445);
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 15px 20px;
+    margin-top: 5px;
+}
+
+.col-form-label{
+    font-weight:bold;
+}
+.order_summary .row{
+    background-color: rgba(134, 230, 233, 0.445);
+    margin-top:2.5px;
+    box-sizing: border-box;
+    padding:10px;
+}
